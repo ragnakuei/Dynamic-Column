@@ -1,7 +1,7 @@
 ﻿CREATE TABLE [dbo].[ColumnBlock](
 	[Id] [uniqueidentifier] NOT NULL,
 	[Text] [nvarchar](50) NOT NULL,
-	[ValueText] [nvarchar](50) NOT NULL,
+	[ValueText] [nvarchar](50) NULL,
 	[IsRequired] [bit] NOT NULL,
  CONSTRAINT [PK_ColumnBlock] PRIMARY KEY CLUSTERED 
 (

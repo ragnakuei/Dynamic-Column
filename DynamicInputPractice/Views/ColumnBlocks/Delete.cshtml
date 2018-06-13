@@ -1,0 +1,40 @@
+﻿@model SharedLibrary.ViewModels.ColumnBlockVMItem
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>ColumnBlockVMItem</h4>
+    <hr/>
+    <dl class="dl-horizontal">
+        <input asp-for="Id" type="hidden"/>
+        <dt>
+            @Html.DisplayNameFor(model => model.Text)
+        </dt>
+        <dd>
+            <input asp-for="Text" disabled></input>
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ValueText)
+        </dt>
+        <dd>
+            <input asp-for="ValueText" disabled></input>
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.IsRequired)
+        </dt>
+        <dd>
+            <input asp-for="IsRequired" disabled></input>
+        </dd>
+    </dl>
+
+    <form asp-action="Delete" method="post">
+        @Html.AntiForgeryToken()
+        <input type="submit" value="Delete" class="btn btn-default"/> |
+        <a asp-action="Index">Back to List</a>
+    </form>
+</div>

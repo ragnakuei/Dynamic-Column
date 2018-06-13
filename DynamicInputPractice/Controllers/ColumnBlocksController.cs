@@ -1,9 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using BLL.ILogics;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Routing;
+using SharedLibrary.ViewModels;
 
 namespace DynamicInputPractice.Controllers
 {
@@ -20,6 +19,41 @@ namespace DynamicInputPractice.Controllers
         {
             var model = _logic.Get();
             return View(model);
+        }
+
+        [HttpGet]
+        public IActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Create(ColumnBlockVMItem vModel)
+        {
+            if ( ModelState.IsValid )
+            {
+                _logic.Add(vModel);
+                return RedirectToAction("Index");
+            }
+
+            return View(vModel);
+        }
+
+        [HttpGet]
+        public IActionResult Delete(Guid id)
+        {
+            var vModel = _logic.Get(id);
+            return View(vModel);
+        }
+
+        [HttpPost]
+        [ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public IActionResult DeletePost(Guid id)
+        {
+            _logic.Remove(id);
+            return RedirectToAction("Index");
         }
     }
 }

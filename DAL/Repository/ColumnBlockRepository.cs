@@ -25,6 +25,47 @@ namespace DAL.Repository
             return columnBlocks;
         }
 
+        public ColumnBlockDTO Get(Guid id)
+        {
+            var columnBlock = _dbContext.ColumnBlocks
+                                        .Find(id);
+            var dto = ToColumnBlockDTO(columnBlock);
+            return dto;
+        }
+
+        public void Remove(Guid id)
+        {
+            try
+            {
+                var entity = _dbContext.ColumnBlocks.Find(id);
+                _dbContext.ColumnBlocks.Remove(entity);
+                _dbContext.SaveChanges();
+            }
+            catch ( Exception e )
+            {
+            }
+        }
+
+        public int Add(ColumnBlockDTO dto)
+        {
+            var entityModel = ToColumnBlock(dto);
+            _dbContext.ColumnBlocks.Add(entityModel);
+            var result = _dbContext.SaveChanges();
+            return result;
+        }
+
+        private ColumnBlock ToColumnBlock(ColumnBlockDTO dto)
+        {
+            var result = new ColumnBlock
+                         {
+                                 Id         = dto.Id,
+                                 Text       = dto.Text,
+                                 ValueText  = dto.ValueText,
+                                 IsRequired = dto.IsRequired
+                         };
+            return result;
+        }
+
         private ColumnBlockDTO ToColumnBlockDTO(ColumnBlock columnBlock)
         {
             var result = new ColumnBlockDTO
