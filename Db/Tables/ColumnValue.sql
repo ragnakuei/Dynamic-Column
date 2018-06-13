@@ -1,6 +1,6 @@
-﻿CREATE TABLE [dbo].[Column](
+﻿CREATE TABLE [dbo].[ColumnValue](
 	[Id] [uniqueidentifier] NOT NULL,
-	[ColumnBlockId] [uniqueidentifier] NOT NULL,
+	[ColumnMetaId] [uniqueidentifier] NOT NULL,
 	[Value] [nvarchar](50) NULL,
  CONSTRAINT [PK_Column] PRIMARY KEY CLUSTERED 
 (
@@ -10,11 +10,11 @@
 
 GO
 
-ALTER TABLE [dbo].[Column]  WITH CHECK ADD  CONSTRAINT [FK_Column_ColumnBlockId] FOREIGN KEY([ColumnBlockId])
-REFERENCES [dbo].[ColumnBlock] ([Id])
+ALTER TABLE [dbo].[ColumnValue]  WITH CHECK ADD  CONSTRAINT [FK_Column_ColumnMetaId] FOREIGN KEY([ColumnMetaId])
+REFERENCES [dbo].[ColumnMeta] ([Id])
 ON UPDATE CASCADE
 ON DELETE CASCADE
 GO
 
-ALTER TABLE [dbo].[Column] CHECK CONSTRAINT [FK_Column_ColumnBlockId]
+ALTER TABLE [dbo].[ColumnValue] CHECK CONSTRAINT [FK_Column_ColumnMetaId]
 GO

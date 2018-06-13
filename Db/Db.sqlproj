@@ -60,7 +60,8 @@
     <Folder Include="Tables" />
   </ItemGroup>
   <ItemGroup>
-    <Build Include="Tables\Column.sql" />
+    <Build Include="Tables\ColumnValue.sql" />
+    <Build Include="Tables\ColumnMeta.sql" />
     <Build Include="Tables\ColumnBlock.sql" />
   </ItemGroup>
   <ItemGroup>
