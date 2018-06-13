@@ -19,7 +19,7 @@ namespace DynamicInputPractice.Controllers
         public IActionResult Index()
         {
             var model = _logic.Get();
-            return View();
+            return View(model);
         }
     }
 }

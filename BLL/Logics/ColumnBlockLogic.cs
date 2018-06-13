@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using BLL.ILogics;
 using DAL.IRepository;
 using SharedLibrary.DTOs;
@@ -15,16 +16,26 @@ namespace BLL.Logics
             _repository = repository;
         }
 
-        public ColumnBlockViewModel Get()
+        public ColumnBlockVM Get()
         {
             var columnBlocks = _repository.Get();
             var result = ToColumnBlockViewModel(columnBlocks);
             return result;
         }
 
-        private ColumnBlockViewModel ToColumnBlockViewModel(IEnumerable<ColumnBlockDTO> columnBlocks)
+        private ColumnBlockVM ToColumnBlockViewModel(IEnumerable<ColumnBlockDTO> columnBlocks)
         {
-            throw new System.NotImplementedException();
+            var result = new ColumnBlockVM();
+
+            result.ColumnBlockItems = columnBlocks.Select(cb => new ColumnBlockVMItem
+                                                                {
+                                                                        Id         = cb.Id,
+                                                                        Text       = cb.Text,
+                                                                        ValueText  = cb.ValueText,
+                                                                        IsRequired = cb.IsRequired
+                                                                })
+                                                  .ToList();
+            return result;
         }
     }
 }

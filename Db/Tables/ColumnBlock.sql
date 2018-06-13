@@ -2,7 +2,7 @@
 	[Id] [uniqueidentifier] NOT NULL,
 	[Text] [nvarchar](50) NOT NULL,
 	[ValueText] [nvarchar](50) NOT NULL,
-	[Required] [bit] NOT NULL,
+	[IsRequired] [bit] NOT NULL,
  CONSTRAINT [PK_ColumnBlock] PRIMARY KEY CLUSTERED 
 (
 	[Id] ASC

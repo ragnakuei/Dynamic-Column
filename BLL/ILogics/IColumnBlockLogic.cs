@@ -4,6 +4,6 @@ namespace BLL.ILogics
 {
     public interface IColumnBlockLogic
     {
-        ColumnBlockViewModel Get();
+        ColumnBlockVM Get();
     }
 }

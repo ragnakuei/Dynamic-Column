@@ -13,6 +13,6 @@ namespace DAL.Models
         public string Text { get; set; }
         [MaxLength(50)]
         public string ValueText { get; set; }
-        public bool Required { get;    set; }
+        public bool IsRequired { get;    set; }
     }
 }

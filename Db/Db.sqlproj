@@ -63,4 +63,10 @@
     <Build Include="Tables\Column.sql" />
     <Build Include="Tables\ColumnBlock.sql" />
   </ItemGroup>
+  <ItemGroup>
+    <RefactorLog Include="Db.refactorlog" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Db.publish.xml" />
+  </ItemGroup>
 </Project>

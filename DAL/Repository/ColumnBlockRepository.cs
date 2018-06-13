@@ -27,7 +27,14 @@ namespace DAL.Repository
 
         private ColumnBlockDTO ToColumnBlockDTO(ColumnBlock columnBlock)
         {
-            throw new NotImplementedException();
+            var result = new ColumnBlockDTO
+                         {
+                                 Id         = columnBlock.Id,
+                                 Text       = columnBlock.Text,
+                                 ValueText  = columnBlock.ValueText,
+                                 IsRequired = columnBlock.IsRequired
+                         };
+            return result;
         }
 
         public void Dispose()

@@ -2,8 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using BLL.ILogics;
+using BLL.Logics;
 using DAL;
 using DAL.EF;
+using DAL.IRepository;
+using DAL.Repository;
+using DynamicInputPractice.Controllers;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -27,11 +32,12 @@ namespace DynamicInputPractice
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
-            var _services = new ServiceCollection();
-
-            _services.AddDbContext<SqlServerDbContext>(
+            services.AddDbContext<SqlServerDbContext>(
                 options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
+            services.AddScoped<ColumnBlocksController>();
+            services.AddScoped<IColumnBlockLogic, ColumnBlockLogic>();
+            services.AddScoped<IColumnBlockRepository, ColumnBlockRepository>();
 
             services.Configure<CookiePolicyOptions>(options =>
             {
