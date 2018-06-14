@@ -1,31 +1,42 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using DAL.EF;
 using DAL.IRepository;
+using DAL.Models;
 using SharedLibrary.DTOs;
 
 namespace DAL.Repository
 {
-    public class ColumnRepository : IColumnRepository, IDisposable
-    {
-        private readonly SqlServerDbContext _dbContext;
+    //public class ColumnRepository : IColumnRepository
+    //{
+    //    private readonly SqlServerDbContext _dbContext;
 
-        public ColumnRepository(SqlServerDbContext dbContext)
-        {
-            _dbContext = dbContext;
-        }
+    //    public ColumnRepository(SqlServerDbContext dbContext)
+    //    {
+    //        _dbContext = dbContext;
+    //    }
 
-        public List<ColumnDTO> Get()
-        {
-            var columns = _dbContext.ColumnBlocks.ToList();
-            return null;
-        }
+    //    public IEnumerable<ColumnDTO> Get(Guid id)
+    //    {
+    //        var result = _dbContext.ColumnBlocks
+    //                                    .Where(cb => cb.Id == id)
+    //                                    .AsEnumerable()
+    //                                    .Select(cb => ToColumnDTO(cb));
+    //        return result;
+    //    }
 
-        public void Dispose()
-        {
-            _dbContext?.Dispose();
-        }
-    }
+    //    private ColumnDTO ToColumnDTO(ColumnBlock cb)
+    //    {
+    //        var result = new ColumnDTO();
+    //        result.Meta = ToColumnBlockDTO(cb);
+    //        result.Value = cb.Column.Value;
+    //        return result;
+    //    }
+
+    //    private ColumnBlockDTO ToColumnBlockDTO(ColumnBlock cb)
+    //    {
+    //        throw new NotImplementedException();
+    //    }
+    //}
 }

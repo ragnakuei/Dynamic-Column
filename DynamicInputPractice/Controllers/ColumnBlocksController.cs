@@ -1,8 +1,7 @@
 ﻿using System;
 using BLL.ILogics;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Routing;
-using SharedLibrary.ViewModels;
+using SharedLibrary.DTOs;
 
 namespace DynamicInputPractice.Controllers
 {
@@ -29,7 +28,7 @@ namespace DynamicInputPractice.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(ColumnBlockVMItem vModel)
+        public IActionResult Create(ColumnBlockDTO vModel)
         {
             if ( ModelState.IsValid )
             {

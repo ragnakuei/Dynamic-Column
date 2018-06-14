@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using BLL.ILogics;
 using DAL.IRepository;
+using SharedLibrary;
 using SharedLibrary.DTOs;
-using SharedLibrary.ViewModels;
 
 namespace BLL.Logics
 {
@@ -17,62 +17,27 @@ namespace BLL.Logics
             _repository = repository;
         }
 
-        public ColumnBlockVM Get()
+        public List<ColumnBlockDTO> Get()
         {
-            var columnBlocks = _repository.Get();
-            var result = ToColumnBlockViewModel(columnBlocks);
+            var result = _repository.Get().ToList();
             return result;
         }
 
-        public int Add(ColumnBlockVMItem vModel)
+        public int Add(ColumnBlockDTO dto)
         {
-            var dto = ToColumnBlockDTO(vModel);
             var result = _repository.Add(dto);
             return result;
         }
 
-        public ColumnBlockVMItem Get(Guid id)
+        public ColumnBlockDTO Get(Guid id)
         {
-            var dto = _repository.Get(id);
-            var result = ToColumnBlockVMItem(dto);
+            var result = _repository.Get(id);
             return result;
         }
 
         public void Remove(Guid id)
         {
             _repository.Remove(id);
-        }
-
-        private ColumnBlockVM ToColumnBlockViewModel(IEnumerable<ColumnBlockDTO> columnBlocks)
-        {
-            var result = new ColumnBlockVM();
-
-            result.ColumnBlockItems = columnBlocks.Select(cb => ToColumnBlockVMItem(cb))
-                                                  .ToList();
-            return result;
-        }
-
-        private ColumnBlockDTO ToColumnBlockDTO(ColumnBlockVMItem vModel)
-        {
-            var result = new ColumnBlockDTO 
-                         {
-                                 Id         = Guid.NewGuid(),
-                                 Text       = vModel.Text,
-                                 ValueText  = vModel.ValueText,
-                                 IsRequired = vModel.IsRequired,
-                         };
-            return result;
-        }
-
-        private ColumnBlockVMItem ToColumnBlockVMItem(ColumnBlockDTO dto)
-        {
-            return new ColumnBlockVMItem
-                   {
-                           Id         = dto.Id,
-                           Text       = dto.Text,
-                           ValueText  = dto.ValueText,
-                           IsRequired = dto.IsRequired
-                   };
         }
     }
 }

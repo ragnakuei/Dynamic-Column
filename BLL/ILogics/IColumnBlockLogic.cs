@@ -1,13 +1,15 @@
 ﻿using System;
-using SharedLibrary.ViewModels;
+using System.Collections.Generic;
+using SharedLibrary;
+using SharedLibrary.DTOs;
 
 namespace BLL.ILogics
 {
     public interface IColumnBlockLogic
     {
-        ColumnBlockVM Get();
-        int Add(ColumnBlockVMItem vModel);
+        List<ColumnBlockDTO> Get();
+        ColumnBlockDTO Get(Guid id);
+        int Add(ColumnBlockDTO dto);
         void Remove(Guid id);
-        ColumnBlockVMItem Get(Guid id);
     }
 }

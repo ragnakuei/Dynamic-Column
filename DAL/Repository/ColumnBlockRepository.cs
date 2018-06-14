@@ -19,7 +19,7 @@ namespace DAL.Repository
 
         public IEnumerable<ColumnBlockDTO> Get()
         {
-            var columnBlocks = _dbContext.ColumnBlocks
+            var columnBlocks = _dbContext.ColumnBlock
                                          .AsEnumerable()
                                          .Select(c => ToColumnBlockDTO(c));
             return columnBlocks;
@@ -27,18 +27,26 @@ namespace DAL.Repository
 
         public ColumnBlockDTO Get(Guid id)
         {
-            var columnBlock = _dbContext.ColumnBlocks
+            var columnBlock = _dbContext.ColumnBlock
                                         .Find(id);
             var dto = ToColumnBlockDTO(columnBlock);
             return dto;
+        }
+
+        public int Add(ColumnBlockDTO dto)
+        {
+            var entityModel = ToColumnBlock(dto);
+            _dbContext.ColumnBlock.Add(entityModel);
+            var result = _dbContext.SaveChanges();
+            return result;
         }
 
         public void Remove(Guid id)
         {
             try
             {
-                var entity = _dbContext.ColumnBlocks.Find(id);
-                _dbContext.ColumnBlocks.Remove(entity);
+                var entity = _dbContext.ColumnBlock.Find(id);
+                _dbContext.ColumnBlock.Remove(entity);
                 _dbContext.SaveChanges();
             }
             catch ( Exception e )
@@ -46,41 +54,59 @@ namespace DAL.Repository
             }
         }
 
-        public int Add(ColumnBlockDTO dto)
+        public void Dispose()
         {
-            var entityModel = ToColumnBlock(dto);
-            _dbContext.ColumnBlocks.Add(entityModel);
-            var result = _dbContext.SaveChanges();
+            _dbContext?.Dispose();
+        }
+
+        private ColumnBlockDTO ToColumnBlockDTO(ColumnBlock columnBlock)
+        {
+            var result = new ColumnBlockDTO();
+            result.Name = columnBlock.Name;
+
+            result.ColumnDTOs = columnBlock.ColumnMetas
+                                           .Select(cm => ToColumnMetaDTO(cm))
+                                           .ToList();
+            return result;
+        }
+
+        private ColumnDTO ToColumnMetaDTO(ColumnMeta cm)
+        {
+            var result = new ColumnDTO();
+            result.Value = cm.ColumnValue.Value;
+            result.ColumnMetaDTO = new ColumnMetaDTO
+                                   {
+                                           Id         = cm.Id,
+                                           Text       = cm.Text,
+                                           ValueText  = cm.ValueText,
+                                           IsRequired = cm.IsRequired
+                                   };
             return result;
         }
 
         private ColumnBlock ToColumnBlock(ColumnBlockDTO dto)
         {
-            var result = new ColumnBlock
-                         {
-                                 Id         = dto.Id,
-                                 Text       = dto.Text,
-                                 ValueText  = dto.ValueText,
-                                 IsRequired = dto.IsRequired
-                         };
+            var result = new ColumnBlock();
+            result.Name = dto.Name;
+
+            result.ColumnMetas = dto.ColumnDTOs
+                                    .Select(cm => ToColumnMeta(cm))
+                                    .ToList();
             return result;
         }
 
-        private ColumnBlockDTO ToColumnBlockDTO(ColumnBlock columnBlock)
-        {
-            var result = new ColumnBlockDTO
-                         {
-                                 Id         = columnBlock.Id,
-                                 Text       = columnBlock.Text,
-                                 ValueText  = columnBlock.ValueText,
-                                 IsRequired = columnBlock.IsRequired
-                         };
-            return result;
-        }
 
-        public void Dispose()
+        private ColumnMeta ToColumnMeta(ColumnDTO cm)
         {
-            _dbContext?.Dispose();
+            var result = new ColumnMeta
+                         {
+                                 Id         = cm.ColumnMetaDTO.Id,
+                                 Text       = cm.ColumnMetaDTO.Text,
+                                 ValueText  = cm.ColumnMetaDTO.ValueText,
+                                 IsRequired = cm.ColumnMetaDTO.IsRequired
+                         };
+            result.ColumnValue.Value = cm.Value;
+            return result;
         }
     }
 }

@@ -1,18 +1,24 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using SharedLibrary.DTOs;
 
 namespace DAL.Models
 {
     [Table("ColumnBlock")]
     public class ColumnBlock
     {
+        public ColumnBlock()
+        {
+            this.ColumnMetas = new List<ColumnMeta>();
+        }
+
         [Key]
         public Guid Id { get; set; }
         [MaxLength(50)]
-        public string Text { get; set; }
-        [MaxLength(50)]
-        public string ValueText { get; set; }
-        public bool IsRequired { get;    set; }
+        public string Name { get; set; }
+
+        public List<ColumnMeta> ColumnMetas { get; set; }
     }
 }

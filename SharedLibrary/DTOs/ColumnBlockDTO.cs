@@ -1,12 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace SharedLibrary.DTOs
 {
     public class ColumnBlockDTO
     {
         public Guid Id { get; set; }
-        public string Text { get; set; }
-        public string ValueText { get; set; }
-        public bool IsRequired { get; set; }
+        public string Name { get; set; }
+        public List<ColumnDTO> ColumnDTOs { get; set; }
     }
 }
