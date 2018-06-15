@@ -30,7 +30,8 @@ namespace DAL.Repository
         public ColumnBlockDTO Get(Guid id)
         {
             var columnBlock = _dbContext.ColumnBlock
-                                        .Find(id);
+                                        .Include(cb=>cb.ColumnMetas)
+                                        .FirstOrDefault(cb=>cb.Id == id);
             var dto = ToColumnBlockDTO(columnBlock);
             return dto;
         }
