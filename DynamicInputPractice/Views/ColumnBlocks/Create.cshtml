@@ -34,7 +34,7 @@
                     </th>
                 </tr>
                 </thead>
-                <tbody>
+                <tbody class="columnMetas">
                 @for ( var i = 0; i < Model.ColumnDTOs.Count; i++ )
                 {
                     <tr>
@@ -55,7 +55,7 @@
                 </tbody>
             </table>
             <div class="form-group">
-                <a class="btn btn-default">
+                <a class="btn btn-default addColumn">
                     <span class="glyphicon glyphicon-plus">&nbsp;Column</span>
                 </a>
                 <input type="submit" value="Create" class="btn btn-default"/>
@@ -71,4 +71,23 @@
 
 @section Scripts {
     @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+    
+    <script>
+
+        (function() {
+            var columnCount = @(Model.ColumnDTOs.Count);
+            $('.addColumn').click(function () {
+                console.log('click');
+                var html = GetColumnHtmlTemplate();
+                $('.columnMetas').append(html);
+            });
+
+            function GetColumnHtmlTemplate() {
+                var html = '@{  var j = Model.ColumnDTOs.Count-1;  <tr><td><input asp-for="ColumnDTOs[j].ColumnMetaDTO.Text" class="form-control"/> <span asp-validation-for="ColumnDTOs[j].ColumnMetaDTO.Text" class="text-danger"></span> </td> <td> <input asp-for="ColumnDTOs[j].ColumnMetaDTO.ValueText" class="form-control"/> <span asp-validation-for="ColumnDTOs[j].ColumnMetaDTO.ValueText" class="text-danger"></span> </td> <td> <input asp-for="ColumnDTOs[j].ColumnMetaDTO.IsRequired" class="form-control"/> <span asp-validation-for="ColumnDTOs[j].ColumnMetaDTO.IsRequired" class="text-danger"></span></td></tr> }';
+                var result = html.replace('[0]', '[' + columnCount + ']');
+                columnCount ++;
+                return result;
+            }
+        })();
+    </script>
 }
