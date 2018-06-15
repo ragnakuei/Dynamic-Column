@@ -33,7 +33,9 @@ namespace DynamicInputPractice
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<SqlServerDbContext>(
-                options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+                options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"))
+                                  .UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking)
+                                  .EnableSensitiveDataLogging());
 
             services.AddScoped<ColumnBlocksController>();
             services.AddScoped<IColumnBlockLogic, ColumnBlockLogic>();

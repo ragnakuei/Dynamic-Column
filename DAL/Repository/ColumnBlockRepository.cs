@@ -87,25 +87,27 @@ namespace DAL.Repository
         private ColumnBlock ToColumnBlock(ColumnBlockDTO dto)
         {
             var result = new ColumnBlock();
+            result.Id = Guid.NewGuid();
             result.Name = dto.Name;
 
             result.ColumnMetas = dto.ColumnDTOs
-                                    .Select(cm => ToColumnMeta(cm))
+                                    .Select(cm => ToColumnMeta(result.Id, cm))
                                     .ToList();
             return result;
         }
 
 
-        private ColumnMeta ToColumnMeta(ColumnDTO cm)
+        private ColumnMeta ToColumnMeta(Guid id, ColumnDTO cm)
         {
             var result = new ColumnMeta
                          {
-                                 Id         = cm.ColumnMetaDTO.Id,
+                                 Id         = Guid.NewGuid(),
                                  Text       = cm.ColumnMetaDTO.Text,
                                  ValueText  = cm.ColumnMetaDTO.ValueText,
-                                 IsRequired = cm.ColumnMetaDTO.IsRequired
+                                 IsRequired = cm.ColumnMetaDTO.IsRequired,
+                                 ColumnBlockId = id,
                          };
-            result.ColumnValue.Value = cm.Value;
+            //result.ColumnValue.Value = cm.Value;
             return result;
         }
     }

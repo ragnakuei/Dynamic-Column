@@ -7,18 +7,43 @@
 <h2>Create</h2>
 
 <h4>ColumnBlockDTO</h4>
-<hr />
+<hr/>
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Create">
+            @Html.AntiForgeryToken()
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control" />
+                <input asp-for="Name" class="form-control"/>
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
+
+            <ul>
+                @for ( var i = 0; i < 3; i++ )
+                {
+                <li>
+                    <div class="form-group">
+                        <label asp-for="ColumnDTOs[i].ColumnMetaDTO.Text" class="control-label"></label>
+                        <input asp-for="ColumnDTOs[i].ColumnMetaDTO.Text" class="form-control" />
+                        <span asp-validation-for="ColumnDTOs[i].ColumnMetaDTO.Text" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="ColumnDTOs[i].ColumnMetaDTO.ValueText" class="control-label"></label>
+                        <input asp-for="ColumnDTOs[i].ColumnMetaDTO.ValueText" class="form-control" />
+                        <span asp-validation-for="ColumnDTOs[i].ColumnMetaDTO.ValueText" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="ColumnDTOs[i].ColumnMetaDTO.IsRequired" class="control-label"></label>
+                        <input asp-for="ColumnDTOs[i].ColumnMetaDTO.IsRequired" class="form-control"/>
+                        <span asp-validation-for="ColumnDTOs[i].ColumnMetaDTO.IsRequired" class="text-danger"></span>
+                    </div>
+                </li>
+                }
+            </ul>
+
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="Create" class="btn btn-default"/>
             </div>
         </form>
     </div>
@@ -29,5 +54,5 @@
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
 }

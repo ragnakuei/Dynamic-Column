@@ -1,8 +1,7 @@
 ﻿CREATE TABLE [dbo].[ColumnValue](
 	[ColumnMetaId] [uniqueidentifier] NOT NULL,
-	[Value] [nvarchar](50) NULL,
- CONSTRAINT [PK_Column] PRIMARY KEY CLUSTERED 
-([ColumnMetaId])WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+	[Value] [nvarchar](50) NULL, 
+    CONSTRAINT [PK_ColumnValue] PRIMARY KEY ([ColumnMetaId]),
 ) ON [PRIMARY]
 
 GO

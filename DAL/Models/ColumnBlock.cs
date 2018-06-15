@@ -6,19 +6,18 @@ using SharedLibrary.DTOs;
 
 namespace DAL.Models
 {
-    [Table("ColumnBlock")]
-    public class ColumnBlock
+[Table("ColumnBlock")]
+public class ColumnBlock
+{
+    public ColumnBlock()
     {
-        public ColumnBlock()
-        {
-            this.ColumnMetas = new List<ColumnMeta>();
-        }
-
-        [Key]
-        public Guid Id { get; set; }
-        [MaxLength(50)]
-        public string Name { get; set; }
-
-        public List<ColumnMeta> ColumnMetas { get; set; }
+        this.ColumnMetas = new List<ColumnMeta>();
     }
+
+    public Guid Id { get; set; }
+    [MaxLength(50)]
+    public string Name { get; set; }
+
+    public List<ColumnMeta> ColumnMetas { get; set; }
+}
 }
