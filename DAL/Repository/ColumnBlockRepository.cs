@@ -4,6 +4,7 @@ using System.Linq;
 using DAL.EF;
 using DAL.IRepository;
 using DAL.Models;
+using Microsoft.EntityFrameworkCore;
 using SharedLibrary.DTOs;
 
 namespace DAL.Repository
@@ -20,6 +21,7 @@ namespace DAL.Repository
         public IEnumerable<ColumnBlockDTO> Get()
         {
             var columnBlocks = _dbContext.ColumnBlock
+                                         .Include(c=>c.ColumnMetas)
                                          .AsEnumerable()
                                          .Select(c => ToColumnBlockDTO(c));
             return columnBlocks;
@@ -62,6 +64,7 @@ namespace DAL.Repository
         private ColumnBlockDTO ToColumnBlockDTO(ColumnBlock columnBlock)
         {
             var result = new ColumnBlockDTO();
+            result.Id = columnBlock.Id;
             result.Name = columnBlock.Name;
 
             result.ColumnDTOs = columnBlock.ColumnMetas
@@ -73,7 +76,7 @@ namespace DAL.Repository
         private ColumnDTO ToColumnMetaDTO(ColumnMeta cm)
         {
             var result = new ColumnDTO();
-            result.Value = cm.ColumnValue.Value;
+            result.Value = cm.ColumnValue?.Value ?? String.Empty;
             result.ColumnMetaDTO = new ColumnMetaDTO
                                    {
                                            Id         = cm.Id,

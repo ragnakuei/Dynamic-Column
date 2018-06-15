@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using BLL.ILogics;
 using Microsoft.AspNetCore.Mvc;
 using SharedLibrary.DTOs;
@@ -23,7 +24,10 @@ namespace DynamicInputPractice.Controllers
         [HttpGet]
         public IActionResult Create()
         {
-            return View();
+            var vModel = new ColumnBlockDTO();
+            vModel.ColumnDTOs = new List<ColumnDTO>();
+            vModel.ColumnDTOs.Add(new ColumnDTO());
+            return View(vModel);
         }
 
         [HttpPost]
