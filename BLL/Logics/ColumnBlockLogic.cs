@@ -20,12 +20,20 @@ namespace BLL.Logics
         public List<ColumnBlockDTO> Get()
         {
             var result = _repository.Get().ToList();
+            
+            //TODO: 應該有更好的做法
+            foreach ( var columnBlockDto in result )
+            {
+                columnBlockDto.ColumnDTOs = columnBlockDto.ColumnDTOs
+                                                          .OrderBy(c => c.ColumnMetaDTO.OrderId)
+                                                          .ToList();
+            }
             return result;
         }
 
         public int Add(ColumnBlockDTO dto)
         {
-            for ( short i = 0; i < dto.ColumnDTOs.Count; i++ )
+            for ( byte i = 0; i < dto.ColumnDTOs.Count; i++ )
             {
                 dto.ColumnDTOs[i].ColumnMetaDTO.OrderId = i;
             }

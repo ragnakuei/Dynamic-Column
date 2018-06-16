@@ -83,7 +83,8 @@ namespace DAL.Repository
                                            Id         = cm.Id,
                                            Text       = cm.Text,
                                            ValueText  = cm.ValueText,
-                                           IsRequired = cm.IsRequired
+                                           IsRequired = cm.IsRequired,
+                                           OrderId    = cm.OrderId
                                    };
             return result;
         }
