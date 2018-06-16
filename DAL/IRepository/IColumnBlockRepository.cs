@@ -10,5 +10,6 @@ namespace DAL.IRepository
         ColumnBlockDTO              Get(Guid            id);
         int                         Add(ColumnBlockDTO  entityModel);
         void                        Remove(Guid         id);
+        void UpdateValue(List<ColumnBlockDTO> vModel);
     }
 }
