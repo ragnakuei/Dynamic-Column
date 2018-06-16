@@ -25,7 +25,7 @@ namespace BLL.Logics
 
         public int Add(ColumnBlockDTO dto)
         {
-            for ( int i = 0; i < dto.ColumnDTOs.Count; i++ )
+            for ( short i = 0; i < dto.ColumnDTOs.Count; i++ )
             {
                 dto.ColumnDTOs[i].ColumnMetaDTO.OrderId = i;
             }
