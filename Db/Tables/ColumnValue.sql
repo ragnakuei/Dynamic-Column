@@ -1,7 +1,8 @@
 ﻿CREATE TABLE [dbo].[ColumnValue](
-	[ColumnMetaId] [uniqueidentifier] NOT NULL,
+	[Id] [uniqueidentifier] NOT NULL, 
 	[Value] [nvarchar](50) NULL, 
-    CONSTRAINT [PK_ColumnValue] PRIMARY KEY ([ColumnMetaId]),
+	[ColumnMetaId] [uniqueidentifier] NOT NULL,
+    CONSTRAINT [PK_ColumnValue] PRIMARY KEY ([Id]),
 ) ON [PRIMARY]
 
 GO

@@ -13,7 +13,7 @@ namespace BLL.Logics
 
         public ColumnBlockLogic(IColumnBlockRepository repository)
         {
-            _repository=repository;
+            _repository = repository;
         }
 
         public List<ColumnBlockDTO> Get()
@@ -22,8 +22,8 @@ namespace BLL.Logics
                                     .ToList();
 
             //TODO: 應該有更好的做法
-            foreach (var columnBlockDto in result)
-                columnBlockDto.ColumnDTOs=columnBlockDto.ColumnDTOs
+            foreach ( var columnBlockDto in result )
+                columnBlockDto.ColumnDTOs = columnBlockDto.ColumnDTOs
                                                           .OrderBy(c => c.ColumnMetaDTO.OrderId)
                                                           .ToList();
             return result;
@@ -31,9 +31,11 @@ namespace BLL.Logics
 
         public int Add(ColumnBlockDTO dto)
         {
-            for (byte i = 0; i<dto.ColumnDTOs.Count; i++)
-                dto.ColumnDTOs[i]
-                   .ColumnMetaDTO.OrderId=i;
+            for ( byte i = 0; i < dto.ColumnDTOs.Count; i++ )
+            {
+                dto.ColumnDTOs[i].ColumnMetaDTO.OrderId = i;
+            }
+
             var result = _repository.Add(dto);
             return result;
         }
@@ -51,6 +53,14 @@ namespace BLL.Logics
 
         public void UpdateValue(List<ColumnBlockDTO> vModel)
         {
+            foreach ( var columnBlockDto in vModel )
+            {
+                foreach ( var columnDto in columnBlockDto.ColumnDTOs )
+                {
+                    columnDto.Id = Guid.NewGuid();
+                } 
+            }
+
             _repository.UpdateValue(vModel);
         }
     }

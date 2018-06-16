@@ -1,21 +1,15 @@
 ﻿@using SharedLibrary.DTOs
-@model IEnumerable<SharedLibrary.DTOs.ColumnBlockDTO>
+@model IEnumerable<ColumnBlockDTO>
 
 @{
     ViewData["Title"]="ReadyToAnswer";
 }
 
-<h2>Index</h2>
+<h2>Question Description</h2>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
 <table class="table">
     <thead>
         <tr>
-            <th>
-                @Html.DisplayName(nameof(ColumnBlockDTO.Id))
-            </th>
             <th>
                 @Html.DisplayName(nameof(ColumnBlockDTO.Name))
             </th>
@@ -26,9 +20,6 @@
         @foreach (var columnBlockDto in Model)
         {
             <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => columnBlockDto.Id)
-                </td>
                 <td>
                     @Html.DisplayFor(modelItem => columnBlockDto.Name)
                 </td>
@@ -65,10 +56,8 @@
                         </tbody>
                     </table>
                 </td>
-                <td>
-                    @Html.ActionLink("Delete" ,"Delete" ,new { id = columnBlockDto.Id })
-                </td>
             </tr>
         }
     </tbody>
 </table>
+<a href="@Url.Action("ToAnswer")" class="btn btn-default" >填寫資料</a>

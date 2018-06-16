@@ -4,13 +4,16 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DAL.Models
 {
-[Table("ColumnValue")]
-public class ColumnValue
-{
-    public Guid ColumnMetaId { get; set; }
-    [MaxLength(50)]
-    public string Value { get; set; }
+    [Table("ColumnValue")]
+    public class ColumnValue
+    {
+        public Guid Id { get; set; }
 
-    public ColumnMeta ColumnMeta { get; set; }
-}
+        [MaxLength(50)]
+        public string Value { get; set; }
+
+        public Guid ColumnMetaId { get; set; }
+
+        public ColumnMeta ColumnMeta { get; set; }
+    }
 }

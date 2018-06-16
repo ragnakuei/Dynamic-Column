@@ -2,12 +2,12 @@
 @model List<SharedLibrary.DTOs.ColumnBlockDTO>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "ReadyToAnswer";
 }
 
 <h2>Question Description</h2>
 
-<form asp-action="Create" method="post">
+<form asp-action="ToAnswer" method="post">
     @Html.AntiForgeryToken()
     <table class="table">
         <thead>
@@ -34,7 +34,7 @@
                                 @Html.DisplayName("Question")
                             </th>
                             <th>
-                                @Html.DisplayName("Answer")
+                                @Html.DisplayName("ToAnswer")
                             </th>
                         </tr>
                         </thead>
@@ -66,5 +66,5 @@
         }
         </tbody>
     </table>
-    <input type="submit" href="@Url.Action("Create")" class="btn btn-default" value="送出"/>
+    <input type="submit" href="@Url.Action("ToAnswer")" class="btn btn-default" value="送出"/>
 </form>

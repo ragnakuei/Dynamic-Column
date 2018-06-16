@@ -16,7 +16,7 @@ namespace DynamicInputPractice.Controllers
         }
 
         [HttpGet]
-        public IActionResult Index()
+        public IActionResult ReadyToAnswer()
         {
             var vModel = _columnValueLogic.Get();
             return View(vModel);
@@ -24,20 +24,27 @@ namespace DynamicInputPractice.Controllers
 
 
         [HttpGet]
-        public IActionResult Create(Guid id)
+        public IActionResult ToAnswer(Guid id)
         {
             var vModel = _columnValueLogic.Get();
             return View(vModel);
         }
 
         [HttpPost]
-        public IActionResult Create(List<ColumnBlockDTO> vModel)
+        public IActionResult ToAnswer(List<ColumnBlockDTO> vModel)
         {
             if ( ModelState.IsValid == false )
                 return View(vModel);
 
             _columnValueLogic.UpdateValue(vModel);
-            return RedirectToAction("Create");
+            return RedirectToAction("ShowAnswers");
+        }
+        
+        [HttpGet]
+        public IActionResult ShowAnswers()
+        {
+            var vModel = _columnValueLogic.Get();
+            return View(vModel);
         }
     }
 }
