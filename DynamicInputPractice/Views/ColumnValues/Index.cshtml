@@ -1,0 +1,63 @@
+﻿@using SharedLibrary.DTOs
+@model IEnumerable<ColumnBlockDTO>
+
+@{
+    ViewData["Title"]="Index";
+}
+
+<h2>Question Description</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayName(nameof(ColumnBlockDTO.Name))
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var columnBlockDto in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => columnBlockDto.Name)
+                </td>
+                <td>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>
+                                    @Html.DisplayName(nameof(ColumnMetaDTO.Text))
+                                </th>
+                                <th>
+                                    @Html.DisplayName(nameof(ColumnMetaDTO.ValueText))
+                                </th>
+                                <th>
+                                    @Html.DisplayName(nameof(ColumnMetaDTO.IsRequired))
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var columnDTO in columnBlockDto.ColumnDTOs)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => columnDTO.ColumnMetaDTO.Text)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => columnDTO.ColumnMetaDTO.ValueText)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => columnDTO.ColumnMetaDTO.IsRequired)
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<a href="@Url.Action("Create")" class="btn btn-default" >填寫資料</a>

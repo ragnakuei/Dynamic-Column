@@ -10,17 +10,26 @@ namespace DynamicInputPractice.Controllers
 {
     public class ColumnValuesController : Controller
     {
-        //private readonly IColumnValueLogic _columnValueLogic;
+        private readonly IColumnBlockLogic _columnValueLogic;
 
-        //public ColumnValuesController(IColumnValueLogic columnValueLogic)
-        //{
-        //    _columnValueLogic = columnValueLogic;
-        //}
+        public ColumnValuesController(IColumnBlockLogic columnValueLogic)
+        {
+            _columnValueLogic=columnValueLogic;
+        }
 
-        //public IActionResult Index(Guid id)
-        //{
-        //    var model = _columnValueLogic.Get(id);
-        //    return View();
-        //}
+        [HttpGet]
+        public IActionResult Index()
+        {
+            var vModel = _columnValueLogic.Get();
+            return View(vModel);
+        }
+
+
+        [HttpGet]
+        public IActionResult Create(Guid id)
+        {
+            var model = _columnValueLogic.Get(id);
+            return View();
+        }
     }
 }
