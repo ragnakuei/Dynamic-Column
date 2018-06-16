@@ -4,6 +4,7 @@ CREATE TABLE [dbo].[ColumnMeta](
 	[Text] [nvarchar](50) NOT NULL,
 	[ValueText] [nvarchar](50) NULL,
 	[IsRequired] [bit] NOT NULL,
+	[OrderId]    TINYINT NOT NULL DEFAULT 0,
 	[ColumnBlockId] [uniqueidentifier] NOT NULL,
  CONSTRAINT [PK_ColumnMeta] PRIMARY KEY CLUSTERED 
 (

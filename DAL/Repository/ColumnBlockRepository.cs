@@ -109,6 +109,7 @@ namespace DAL.Repository
                                  Text       = cm.ColumnMetaDTO.Text,
                                  ValueText  = cm.ColumnMetaDTO.ValueText,
                                  IsRequired = cm.ColumnMetaDTO.IsRequired,
+                                 OrderId    = cm.ColumnMetaDTO.OrderId,
                                  ColumnBlockId = id,
                          };
             //result.ColumnValue.Value = cm.Value;

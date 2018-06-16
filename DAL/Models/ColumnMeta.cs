@@ -13,6 +13,7 @@ public class ColumnMeta
     [MaxLength(50)]
     public string ValueText { get;   set; }
     public bool IsRequired    { get; set; }
+    public short OrderId { get; set; }
     public Guid ColumnBlockId { get; set; }
 
     public ColumnBlock ColumnBlock { get; set; }

@@ -8,5 +8,6 @@ namespace SharedLibrary.DTOs
         public string Text       { get; set; }
         public string ValueText  { get; set; }
         public bool   IsRequired { get; set; }
+        public short  OrderId    { get; set; }
     }
 }
