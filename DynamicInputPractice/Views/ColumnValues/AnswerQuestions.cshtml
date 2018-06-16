@@ -7,7 +7,7 @@
 
 <h2>Question Description</h2>
 
-<form asp-action="ToAnswer" method="post">
+<form asp-action="AnswerQuestions" method="post">
     @Html.AntiForgeryToken()
     <table class="table">
         <thead>
@@ -34,7 +34,7 @@
                                 @Html.DisplayName("Question")
                             </th>
                             <th>
-                                @Html.DisplayName("ToAnswer")
+                                @Html.DisplayName("AnswerQuestions")
                             </th>
                         </tr>
                         </thead>
@@ -49,11 +49,16 @@
                                         @Html.DisplayFor(modelItem => Model[i].ColumnDTOs[j].ColumnMetaDTO.Text)
                                     </td>
                                     <td>
-                                        @{ var isRequired = Model[i].ColumnDTOs[j].ColumnMetaDTO.IsRequired; }
-                                        @Html.TextBoxFor(modelItem => Model[i].ColumnDTOs[j].Value, new
-                                                                                                    {
-                                                                                                            required = isRequired
-                                                                                                    })
+                                        @{
+                                            var isRequired = Model[i].ColumnDTOs[j].ColumnMetaDTO.IsRequired;
+                                            var valueOptions = isRequired
+                                                                       ? new
+                                                                         {
+                                                                                 required = isRequired
+                                                                         }
+                                                                       : new object();
+                                        }
+                                        @Html.TextBoxFor(modelItem => Model[i].ColumnDTOs[j].Value, valueOptions)
                                         @Html.ValidationMessageFor(modelItem => Model[i].ColumnDTOs[j].Value)
                                     </td>
                                 </tr>
@@ -66,5 +71,5 @@
         }
         </tbody>
     </table>
-    <input type="submit" href="@Url.Action("ToAnswer")" class="btn btn-default" value="送出"/>
+    <input type="submit" href="@Url.Action("AnswerQuestions")" class="btn btn-default" value="送出"/>
 </form>

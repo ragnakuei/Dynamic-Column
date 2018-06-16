@@ -24,14 +24,14 @@ namespace DynamicInputPractice.Controllers
 
 
         [HttpGet]
-        public IActionResult ToAnswer(Guid id)
+        public IActionResult AnswerQuestions(Guid id)
         {
             var vModel = _columnValueLogic.Get();
             return View(vModel);
         }
 
         [HttpPost]
-        public IActionResult ToAnswer(List<ColumnBlockDTO> vModel)
+        public IActionResult AnswerQuestions(List<ColumnBlockDTO> vModel)
         {
             if ( ModelState.IsValid == false )
                 return View(vModel);
