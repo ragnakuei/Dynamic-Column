@@ -1,0 +1,62 @@
+﻿@using SharedLibrary.DTOs
+@model IEnumerable<ColumnBlockDTO>
+
+@{
+    ViewData["Title"]="Index";
+}
+
+<h2>Question Description</h2>
+
+<form asp-action="Create" method="post">
+    @Html.AntiForgeryToken()
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayName(nameof(ColumnBlockDTO.Name))
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var columnBlockDto in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => columnBlockDto.Name)
+                    </td>
+                    <td>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        @Html.DisplayName("Question")
+                                    </th>
+                                    <th>
+                                        @Html.DisplayName("Answer")
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @for (int i = 0; i<columnBlockDto.ColumnDTOs.Count; i++)
+                                {
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => columnBlockDto.ColumnDTOs[i].ColumnMetaDTO.Text)
+                                        </td>
+                                        <td>                                            
+                                            @{ var isRequired = columnBlockDto.ColumnDTOs[i].ColumnMetaDTO.IsRequired; }
+                                            @Html.TextBoxFor(modelItem => columnBlockDto.ColumnDTOs[i].Value, new { required = isRequired })
+                                            @Html.ValidationMessageFor(modelItem => columnBlockDto.ColumnDTOs[i].Value)
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <input type="submit" href="@Url.Action("Create")" class="btn btn-default" value="送出" />
+</form>

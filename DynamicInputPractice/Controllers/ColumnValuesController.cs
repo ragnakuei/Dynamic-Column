@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using BLL.ILogics;
-using BLL.Logics;
 using Microsoft.AspNetCore.Mvc;
+using SharedLibrary.DTOs;
 
 namespace DynamicInputPractice.Controllers
 {
@@ -28,8 +26,18 @@ namespace DynamicInputPractice.Controllers
         [HttpGet]
         public IActionResult Create(Guid id)
         {
-            var model = _columnValueLogic.Get(id);
-            return View();
+            var vModel = _columnValueLogic.Get();
+            return View(vModel);
+        }
+
+        [HttpPost]
+        public IActionResult Create(List<ColumnBlockDTO> vModel)
+        {
+            if ( ModelState.IsValid == false )
+                return View(vModel);
+
+            _columnValueLogic.UpdateValue(vModel);
+            return RedirectToAction("Create");
         }
     }
 }
