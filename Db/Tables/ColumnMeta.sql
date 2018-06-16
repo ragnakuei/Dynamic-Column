@@ -15,6 +15,7 @@ GO
 
 ALTER TABLE [dbo].[ColumnMeta]  WITH CHECK ADD  CONSTRAINT [FK_ColumnMeta_ColumnBlockId] FOREIGN KEY([ColumnBlockId])
 REFERENCES [dbo].[ColumnBlock] ([Id])
+ON DELETE CASCADE
 GO
 
 ALTER TABLE [dbo].[ColumnMeta] CHECK CONSTRAINT [FK_ColumnMeta_ColumnBlockId]

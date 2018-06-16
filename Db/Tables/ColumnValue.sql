@@ -8,7 +8,6 @@ GO
 
 ALTER TABLE [dbo].[ColumnValue]  WITH CHECK ADD  CONSTRAINT [FK_Column_ColumnMetaId] FOREIGN KEY([ColumnMetaId])
 REFERENCES [dbo].[ColumnMeta] ([Id])
-ON UPDATE CASCADE
 ON DELETE CASCADE
 GO
 
