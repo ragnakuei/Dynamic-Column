@@ -11,5 +11,6 @@ namespace BLL.ILogics
         ColumnBlockDTO Get(Guid id);
         int Add(ColumnBlockDTO dto);
         void Remove(Guid id);
+        void UpdateValue(List<ColumnBlockDTO> vModel);
     }
 }

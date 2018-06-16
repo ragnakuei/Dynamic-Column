@@ -39,5 +39,10 @@ namespace BLL.Logics
         {
             _repository.Remove(id);
         }
+
+        public void UpdateValue(List<ColumnBlockDTO> vModel)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
